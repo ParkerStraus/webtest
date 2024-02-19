@@ -6,9 +6,9 @@
 
 $dataFile = "data.csv";
 
-header("Content-type: application/x-javascript; charset=UTF-8");
+header("Content-type: application/json; charset=UTF-8");
 
-if (empty($_POST) or empty($_POST['mail'])) {
+if (empty($_POST)) {
     json_encode("INCOMPLETE");
     exit();
 }
@@ -24,7 +24,7 @@ if (!is_writable($dataFile)) {
     trigger_error("FILE_ERROR", E_USER_ERROR);
 }
 
-$fh = fopen($dataFile, "w");
+$fh = fopen($dataFile, "a");
 fputcsv($fh, $row);
 fclose($fh);
 
@@ -32,3 +32,5 @@ echo json_encode("OK");
 exit();
 
 ?>
+
+

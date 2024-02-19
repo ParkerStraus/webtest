@@ -22,7 +22,6 @@ $(document).ready(function()
         $(this).prop('disabled', true);
         $(this).addClass('btn-disabled');
         $("#erError").hide();
-        $("#erError").hide();
         $(this).find(':input').removeClass('is-invalid');
 
         $(this).find(':input').each(function(x,f){
@@ -34,7 +33,7 @@ $(document).ready(function()
             if (!$(this).attr('name'))
                 return true;
             flds[$(f).attr("name")] = $(f).val();
-            formData.append($(this).attr('name'), $(this).val());
+            formData.append($(f).attr('name'), $(f).val());
         });
 
         if (err) {
@@ -47,8 +46,8 @@ $(document).ready(function()
         pleaseWait.show();
 
         $.ajax({
-            url: "sabmit.php",
-            type: 'POST',
+            url: "submit.php",
+            type: "POST",
             enctype: 'multipart/form-data',
             data: formData,
             success: function(ret, textStatus)
@@ -56,7 +55,7 @@ $(document).ready(function()
                 pleaseWait.hide();
                 if (ret == "OK") {
                     $($this).hide();
-                    $("#errDone").removeClass("d-none").show();
+                    $("#erDone").removeClass("d-none").show();
                     return;
                 }
                 $("#erError div.return-html").html(ret);
